@@ -6,6 +6,59 @@
  ====================================*/
 
 /*----------------------------------------*/
+/* Accessibility Utilities
+/*----------------------------------------*/
+/* Screen reader only content */
+.sr-only {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border-width: 0;
+}
+
+/* Show element when focused (skip links) */
+.sr-only-focusable:focus,
+.sr-only-focusable:active {
+	position: static;
+	width: auto;
+	height: auto;
+	overflow: visible;
+	clip: auto;
+	white-space: normal;
+}
+
+/* Skip to main content link */
+#skip-link {
+	position: absolute;
+	top: -40px;
+	left: 0;
+	background: #40424a;
+	color: white;
+	padding: 8px 16px;
+	text-decoration: none;
+	z-index: 100000;
+	transition: top 0.2s;
+}
+
+#skip-link:focus {
+	top: 0;
+	outline: 2px solid #fff;
+	outline-offset: 2px;
+}
+
+/* Improve focus visibility */
+a:focus,
+button:focus {
+	outline: 2px solid #40424a;
+	outline-offset: 2px;
+}
+
+/*----------------------------------------*/
 /* Template default CSS
 /*----------------------------------------*/
 html,
