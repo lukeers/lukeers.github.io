@@ -365,17 +365,28 @@
 				base.width = size; base.height = size;
 				base.getContext('2d').drawImage(canvas, 0, 0);
 
+				// Seeded LCG — same seed as watermark
+				var lcgState = 5381;
+				var lcgSeed = 'lr-umbc-ml-2025';
+				for (var si = 0; si < lcgSeed.length; si++) {
+					lcgState = (((lcgState << 5) + lcgState) ^ lcgSeed.charCodeAt(si)) >>> 0;
+				}
+				function lcg() {
+					lcgState = (lcgState * 1664525 + 1013904223) >>> 0;
+					return lcgState / 0xFFFFFFFF;
+				}
+
 				function pulse() {
-					// Random number of pixels, random positions
-					var count = Math.floor(Math.random() * 40) + 10;
+					// 25% of canvas pixels
+					var count = Math.floor(size * size * 0.25);
 					var pts = [];
 					for (var i = 0; i < count; i++) {
 						pts.push({
-							x: Math.floor(Math.random() * size),
-							y: Math.floor(Math.random() * size),
-							r: Math.floor(Math.random() * 200 + 55),
-							g: Math.floor(Math.random() * 200 + 55),
-							b: Math.floor(Math.random() * 200 + 55)
+							x: Math.floor(lcg() * size),
+							y: Math.floor(lcg() * size),
+							r: Math.floor(lcg() * 200 + 55),
+							g: Math.floor(lcg() * 200 + 55),
+							b: Math.floor(lcg() * 200 + 55)
 						});
 					}
 
@@ -397,12 +408,12 @@
 					}
 					fade();
 
-					// Random interval: 2–6 seconds
-					setTimeout(pulse, Math.random() * 4000 + 2000);
+					// Seeded interval: 2–6 seconds
+					setTimeout(pulse, lcg() * 4000 + 2000);
 				}
 
-				// First pulse after a random delay
-				setTimeout(pulse, Math.random() * 3000 + 1500);
+				// First pulse after seeded delay
+				setTimeout(pulse, lcg() * 3000 + 1500);
 			} else {
 				drawPixelated(res);
 			}
