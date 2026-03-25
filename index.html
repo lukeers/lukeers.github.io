@@ -345,6 +345,19 @@
 				clippedDraw(function() {
 					ctx.imageSmoothingEnabled = true;
 					ctx.drawImage(img, 0, 0, size, size);
+					// Unique 3-pixel watermark down the center — hash of seed
+					var h = 5381;
+					var seed = 'lr-umbc-ml-2025';
+					for (var s = 0; s < seed.length; s++) {
+						h = (((h << 5) + h) ^ seed.charCodeAt(s)) >>> 0;
+					}
+					var cx = Math.floor(size / 2);
+					var cy = Math.floor(size * 0.38);
+					for (var p = 0; p < 3; p++) {
+						h = (h * 1664525 + 1013904223) >>> 0;
+						ctx.fillStyle = 'rgba(' + ((h >> 16) & 0xFF) + ',' + ((h >> 8) & 0xFF) + ',' + (h & 0xFF) + ',0.13)';
+						ctx.fillRect(cx, cy + p, 1, 1);
+					}
 				});
 			} else {
 				drawPixelated(res);
