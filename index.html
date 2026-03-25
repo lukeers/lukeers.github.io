@@ -1,124 +1,348 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Luke Richards, Ph.D. (August 2025)</title>
 	<meta charset="UTF-8">
-	<meta name="description" content="Luke Richards">
-	<meta name="keywords" content="resume, civic, onepage, creative, html">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Luke Richards, Ph.D.</title>
+	<meta name="description" content="Luke Richards, Ph.D. — Machine Learning Researcher">
+
 	<!-- Favicon -->
-	<!-- <link href="img/favicon.ico" rel="shortcut icon"/> -->
+	<link href="img/favicon.svg" rel="icon" type="image/svg+xml"/>
+	<link href="img/favicon.ico" rel="shortcut icon"/>
 
-	<!-- Google Fonts -->
-	<link href="https://fonts.googleapis.com/css?family=Josefin+Sans:400,400i,600,600i,700" rel="stylesheet">
+	<!-- Fonts -->
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-	<!-- Stylesheets -->
-	<link rel="stylesheet" href="css/bootstrap.min.css"/>
-	<link rel="stylesheet" href="css/font-awesome.min.css"/>
-	<link rel="stylesheet" href="css/flaticon.css"/>
-	<link rel="stylesheet" href="css/owl.carousel.css"/>
-	<link rel="stylesheet" href="css/magnific-popup.css"/>
-	<link rel="stylesheet" href="css/style.css"/>
+	<style>
+		*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+		:root {
+			/* Muted blue-paper tones — like blue writing paper, no pure white */
+			--bg:             #DDE4EF;
+			--surface:        #E8EDF7;
+			--border:         #C2CDE0;
 
+			/* Dark navy ink for text */
+			--text-primary:   #1E2540;
+			--text-secondary: #48547A;
+			--text-muted:     #8892B4;
 
-	<!--[if lt IE 9]>
-	  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-	  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-	<![endif]-->
+			/* Accent: calm slate blue */
+			--accent:         #3E6085;
+			--accent-hover:   #2C4A68;
+		}
 
+		html, body { height: 100%; }
+
+		body {
+			font-family: 'Inter', system-ui, sans-serif;
+			background: var(--bg);
+			color: var(--text-secondary);
+			font-size: 15px;
+			line-height: 1.75;
+			display: flex;
+			flex-direction: column;
+			min-height: 100vh;
+		}
+
+		main {
+			flex: 1;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			padding: 56px 24px;
+		}
+
+		.card {
+			background: var(--surface);
+			border: 1px solid var(--border);
+			border-radius: 10px;
+			padding: 52px 56px;
+			max-width: 820px;
+			width: 100%;
+			box-shadow:
+				0 1px 3px rgba(20, 30, 60, 0.06),
+				0 6px 24px rgba(20, 30, 60, 0.09);
+		}
+
+		/* Profile row */
+		.profile {
+			display: flex;
+			gap: 52px;
+			align-items: flex-start;
+		}
+
+		.profile-text { flex: 1; }
+
+		.profile-text h1 {
+			font-size: 1.6rem;
+			font-weight: 600;
+			color: var(--text-primary);
+			letter-spacing: -0.025em;
+			margin-bottom: 16px;
+			line-height: 1.25;
+		}
+
+		.profile-text p {
+			color: var(--text-secondary);
+			font-size: 1.05rem;
+			font-weight: 300;
+		}
+
+		.profile-text a {
+			color: var(--accent);
+			text-decoration: none;
+			border-bottom: 1px solid var(--border);
+			transition: color 0.2s, border-color 0.2s;
+		}
+
+		.profile-text a:hover {
+			color: var(--accent-hover);
+			border-color: var(--accent);
+		}
+
+		.profile-photo { flex-shrink: 0; }
+
+		.profile-photo canvas {
+			width: 156px;
+			height: 156px;
+			border-radius: 50%;
+			/* Soft warm ring instead of sharp border */
+			box-shadow:
+				0 0 0 3px var(--surface),
+				0 0 0 5px var(--border);
+			display: block;
+		}
+
+		/* Divider */
+		.divider {
+			border: none;
+			border-top: 1px solid var(--border);
+			margin: 40px 0;
+			opacity: 0.7;
+		}
+
+		/* Info section */
+		.info h2 {
+			font-size: 0.68rem;
+			font-weight: 500;
+			text-transform: uppercase;
+			letter-spacing: 0.12em;
+			color: var(--text-muted);
+			margin-bottom: 20px;
+		}
+
+		.info-list {
+			list-style: none;
+			display: grid;
+			gap: 12px;
+		}
+
+		.info-list li {
+			display: flex;
+			align-items: baseline;
+			gap: 16px;
+			font-size: 0.9rem;
+		}
+
+		.info-list .label {
+			font-weight: 400;
+			color: var(--text-muted);
+			font-size: 0.78rem;
+			text-transform: uppercase;
+			letter-spacing: 0.08em;
+			min-width: 110px;
+			flex-shrink: 0;
+		}
+
+		.info-list a {
+			color: var(--accent);
+			text-decoration: none;
+			border-bottom: 1px solid transparent;
+			transition: color 0.2s, border-color 0.2s;
+		}
+
+		.info-list a:hover {
+			color: var(--accent-hover);
+			border-bottom-color: var(--border);
+		}
+
+		/* Footer */
+		footer {
+			text-align: center;
+			padding: 18px 24px;
+			font-size: 0.76rem;
+			color: var(--text-muted);
+			border-top: 1px solid var(--border);
+			background: var(--bg);
+			letter-spacing: 0.01em;
+		}
+
+		/* Responsive */
+		@media (max-width: 600px) {
+			.card { padding: 36px 28px; }
+			.profile { flex-direction: column-reverse; align-items: center; gap: 32px; }
+			.profile-photo canvas { width: 120px; height: 120px; }
+			.info-list li { flex-direction: column; gap: 2px; }
+			.info-list .label { min-width: unset; }
+		}
+	</style>
 </head>
 <body>
-	<!-- Page Preloder -->
-	<div id="preloder">
-		<div class="loader"></div>
+
+<main>
+	<div class="card">
+		<div class="profile">
+			<div class="profile-text">
+				<h1>Luke Richards, Ph.D.</h1>
+				<p><span style="color: var(--text-primary); font-weight: 500;">Hi!</span> I studied machine learning — specifically the intersection of usability, security, and robustness. I was advised by <a id="cmat-link">Cynthia Matuszek</a>.</p>
+			</div>
+			<figure class="profile-photo">
+				<canvas id="profile-canvas" width="160" height="160" aria-label="A picture of Luke Richards, he is blonde with blue eyes."></canvas>
+			</figure>
+		</div>
+
+		<hr class="divider">
+
+		<section class="info">
+			<h2>Contact &amp; Links</h2>
+			<ul class="info-list">
+				<li><span class="label">Email</span><span id="email-field"></span></li>
+				<li><span class="label">Publications</span><span id="scholar-field"></span></li>
+				<li><span class="label">Code / Data</span><span id="github-field"></span></li>
+				<li><span class="label">Socials</span><span id="linkedin-field"></span></li>
+			</ul>
+		</section>
 	</div>
+</main>
 
-	<!-- Header section start -->
-	<header class="header-section">
-		<div class="container-fluid">
-			<div class="row">
-				<div class="col-md-4">
-					<div class="site-logo">
-						<h2><a href="#">About Me</a></h2>
-						<p></p>
-					</div>
-				</div>
+<footer>
+	&copy; <script>document.write(new Date().getFullYear());</script> Luke Richards
+</footer>
 
-			</div>
-		</div>
-	</header>
-	<!-- Header section end -->
+<script>
+(function() {
+	var d = function(a) { return a.map(function(c){return String.fromCharCode(c);}).join(''); };
 
-	<!-- Hero section start -->
-	<section class="hero-section spad">
-		<div class="container-fluid">
-			<div class="row">
-				<div class="col-xl-10 offset-xl-1">
-					<div class="row">
-						<div class="col-lg-6">
-							<div class="hero-text">
-								<h2>Luke Richards, Ph.D.</h2>
-								<p>Hi! I studied machine learning- specifically the intersection of usability, security, and robustness. I was advised by <a href="https://www.csee.umbc.edu/~cmat/"> Cynthia Matuszek</a>.  
-							</div>
-							<div class="hero-info">
-								<h2>General Info</h2>
-								<ul>
-									<li><span>E-mail</span>lerichards at umbc.edu</li>
-									<li><span>Publications</span><a href="https://scholar.google.com/citations?user=aoDu72EAAAAJ&hl=en">Google Scholar</a>
-									<li><span>Code/Data</span><a href="https://github.com/lukeers?tab=repositories">GitHub</a>
-									<li><span>Socials:</span>  <a href="https://www.linkedin.com/in/lukeers/"><i class="fa fa-linkedin"></i></a> 
-								</ul>
-							</div>
-						</div>
-						<div class="col-md-5">
-							<figure class="hero-image">
-								<img src="img/luke_pic.jpeg" alt="A picture of Luke Richards, he is blonde with blue eyes.">
-							</figure>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!-- Hero section end -->
+	// lerichards at umbc.edu
+	var email = d([108,101,114,105,99,104,97,114,100,115,32,97,116,32,117,109,98,99,46,101,100,117]);
 
-	<!-- Social links section start -->
-	<!-- <div class="social-section">
-		<div class="container-fluid">
-			<div class="row">
-				<div class="col-xl-10 offset-xl-1">
-					<div class="social-link-warp">
-						<div class="social-links">
-							<a href="https://www.linkedin.com/in/lukeers/"><i class="fa fa-linkedin"></i></a>
-							<a href=""><i class="fa fa-twitter"></i></a>
-						</div>
-						<h2 class="hidden-md hidden-sm">My Social Profiles</h2>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div> -->
-	<!-- Social links section end -->
+	// https://scholar.google.com/citations?user=aoDu72EAAAAJ&hl=en
+	var scholar = d([104,116,116,112,115,58,47,47,115,99,104,111,108,97,114,46,103,111,111,103,108,101,46,99,111,109,47,99,105,116,97,116,105,111,110,115,63,117,115,101,114,61,97,111,68,117,55,50,69,65,65,65,65,74,38,104,108,61,101,110]);
 
-	<!-- Footer section start -->
-	<footer class="footer-section">
-		<div class="container text-center">
-			<div class="copyright"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-</div>
-		</div>
-	</footer>
-	<!-- Footer section end -->
+	// https://github.com/lukeers?tab=repositories
+	var github = d([104,116,116,112,115,58,47,47,103,105,116,104,117,98,46,99,111,109,47,108,117,107,101,101,114,115,63,116,97,98,61,114,101,112,111,115,105,116,111,114,105,101,115]);
 
+	// https://www.linkedin.com/in/lukeers/
+	var linkedin = d([104,116,116,112,115,58,47,47,119,119,119,46,108,105,110,107,101,100,105,110,46,99,111,109,47,105,110,47,108,117,107,101,101,114,115,47]);
 
-	<!--====== Javascripts & Jquery ======-->
-	<script src="js/jquery-2.1.4.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/owl.carousel.min.js"></script>
-	<script src="js/magnific-popup.min.js"></script>
-	<script src="js/circle-progress.min.js"></script>
-	<script src="js/main.js"></script>
+	// Email: show scrambled, reveal on hover
+	var emailEl = document.getElementById('email-field');
+	var glyphs = 'abcdefghijklmnopqrstuvwxyz0123456789@._-';
+	var revealed = false;
+	var scrambleTimer = null;
+
+	function showScrambled() {
+		emailEl.textContent = email.split('').map(function(c) {
+			return c === ' ' ? ' ' : glyphs[Math.floor(Math.random() * glyphs.length)];
+		}).join('');
+	}
+
+	function revealEmail() {
+		if (revealed) return;
+		revealed = true;
+		var iterations = 0;
+		var total = email.length * 4;
+		clearInterval(scrambleTimer);
+		scrambleTimer = setInterval(function() {
+			emailEl.textContent = email.split('').map(function(c, i) {
+				if (c === ' ') return ' ';
+				if (i < Math.floor(iterations / 4)) return c;
+				return glyphs[Math.floor(Math.random() * glyphs.length)];
+			}).join('');
+			iterations++;
+			if (iterations > total) {
+				clearInterval(scrambleTimer);
+				emailEl.textContent = email;
+				emailEl.style.cursor = 'text';
+			}
+		}, 28);
+	}
+
+	showScrambled();
+	emailEl.style.cursor = 'pointer';
+	emailEl.style.fontFamily = 'monospace';
+	emailEl.style.color = 'var(--text-muted)';
+	emailEl.addEventListener('mouseenter', function() {
+		emailEl.style.color = '';
+		revealEmail();
+	});
+
+	var scholarEl = document.getElementById('scholar-field');
+	var sa = document.createElement('a');
+	sa.href = scholar; sa.textContent = 'Google Scholar';
+	scholarEl.appendChild(sa);
+
+	var githubEl = document.getElementById('github-field');
+	var ga = document.createElement('a');
+	ga.href = github; ga.textContent = 'GitHub';
+	githubEl.appendChild(ga);
+
+	// https://www.csee.umbc.edu/~cmat/
+	var cmat = d([104,116,116,112,115,58,47,47,119,119,119,46,99,115,101,101,46,117,109,98,99,46,101,100,117,47,126,99,109,97,116,47]);
+	document.getElementById('cmat-link').href = cmat;
+
+	var liEl = document.getElementById('linkedin-field');
+	var la = document.createElement('a');
+	la.href = linkedin; la.textContent = 'LinkedIn';
+	liEl.appendChild(la);
+
+	// Photo: drawn onto canvas so no <img src> exists in the HTML
+	var photoPath = d([105,109,103,47,108,117,107,101,95,112,105,99,46,106,112,101,103]);
+	var canvas = document.getElementById('profile-canvas');
+	var ctx = canvas.getContext('2d');
+	var img = new Image();
+	img.onload = function() {
+		var size = 160;
+
+		function clippedDraw(fn) {
+			ctx.save();
+			ctx.beginPath();
+			ctx.arc(size/2, size/2, size/2, 0, Math.PI*2);
+			ctx.clip();
+			fn();
+			ctx.restore();
+		}
+
+		function drawPixelated(res) {
+			var tmp = document.createElement('canvas');
+			tmp.width = res; tmp.height = res;
+			tmp.getContext('2d').drawImage(img, 0, 0, res, res);
+			clippedDraw(function() {
+				ctx.imageSmoothingEnabled = false;
+				ctx.drawImage(tmp, 0, 0, res, res, 0, 0, size, size);
+			});
+		}
+
+		// Decode: 4×4 blocks → 8×8 → 16×16 → 32×32 → 64×64 → full
+		var res = 4;
+		drawPixelated(res);
+		var timer = setInterval(function() {
+			res *= 2;
+			if (res >= size) {
+				clearInterval(timer);
+				clippedDraw(function() {
+					ctx.imageSmoothingEnabled = true;
+					ctx.drawImage(img, 0, 0, size, size);
+				});
+			} else {
+				drawPixelated(res);
+			}
+		}, 120);
+	};
+	img.src = photoPath;
+})();
+</script>
+
 </body>
 </html>

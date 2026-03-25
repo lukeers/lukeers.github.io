@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <defs>
+    <radialGradient id="bg" cx="40%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#2c3d5e"/>
+      <stop offset="100%" stop-color="#0f1923"/>
+    </radialGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="0.6" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <!-- Background circle -->
+  <circle cx="16" cy="16" r="15.5" fill="url(#bg)"/>
+  <circle cx="16" cy="16" r="15.5" fill="none" stroke="#c9a84c" stroke-width="0.7" opacity="0.6"/>
+  <!-- Large L - dominant left anchor -->
+  <text x="5.5" y="22" font-family="Georgia, 'Times New Roman', serif" font-size="19" font-weight="bold"
+        fill="#c9a84c" opacity="1" filter="url(#glow)" letter-spacing="-1">L</text>
+  <!-- ER - smaller, layered over the right portion -->
+  <text x="14.5" y="19.5" font-family="Georgia, 'Times New Roman', serif" font-size="11" font-weight="bold"
+        fill="#e8d5a3" opacity="0.92" letter-spacing="-0.5">ER</text>
+  <!-- Subtle underline flourish -->
+  <line x1="5" y1="24" x2="27" y2="24" stroke="#c9a84c" stroke-width="0.5" opacity="0.4"/>
+</svg>
