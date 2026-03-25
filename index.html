@@ -273,10 +273,12 @@
 	emailEl.style.cursor = 'pointer';
 	emailEl.style.fontFamily = 'monospace';
 	emailEl.style.color = 'var(--text-muted)';
-	emailEl.addEventListener('mouseenter', function() {
+	function triggerReveal() {
 		emailEl.style.color = '';
 		revealEmail();
-	});
+	}
+	emailEl.addEventListener('mouseenter', triggerReveal);
+	emailEl.addEventListener('touchstart', triggerReveal, { passive: true });
 
 	var scholarEl = document.getElementById('scholar-field');
 	var sa = document.createElement('a');
