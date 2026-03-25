@@ -359,6 +359,50 @@
 						ctx.fillRect(cx, cy + p, 1, 1);
 					}
 				});
+
+				// Store clean final frame for pulse redraws
+				var base = document.createElement('canvas');
+				base.width = size; base.height = size;
+				base.getContext('2d').drawImage(canvas, 0, 0);
+
+				function pulse() {
+					// Random number of pixels, random positions
+					var count = Math.floor(Math.random() * 40) + 10;
+					var pts = [];
+					for (var i = 0; i < count; i++) {
+						pts.push({
+							x: Math.floor(Math.random() * size),
+							y: Math.floor(Math.random() * size),
+							r: Math.floor(Math.random() * 200 + 55),
+							g: Math.floor(Math.random() * 200 + 55),
+							b: Math.floor(Math.random() * 200 + 55)
+						});
+					}
+
+					var alpha = 0.75;
+					function fade() {
+						clippedDraw(function() {
+							ctx.drawImage(base, 0, 0);
+							pts.forEach(function(pt) {
+								ctx.fillStyle = 'rgba(' + pt.r + ',' + pt.g + ',' + pt.b + ',' + alpha + ')';
+								ctx.fillRect(pt.x, pt.y, 1, 1);
+							});
+						});
+						alpha -= 0.04;
+						if (alpha > 0) {
+							requestAnimationFrame(fade);
+						} else {
+							clippedDraw(function() { ctx.drawImage(base, 0, 0); });
+						}
+					}
+					fade();
+
+					// Random interval: 2–6 seconds
+					setTimeout(pulse, Math.random() * 4000 + 2000);
+				}
+
+				// First pulse after a random delay
+				setTimeout(pulse, Math.random() * 3000 + 1500);
 			} else {
 				drawPixelated(res);
 			}
