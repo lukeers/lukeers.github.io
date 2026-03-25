@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <!-- Background -->
+  <rect width="1200" height="630" fill="#1e2540"/>
+
+  <!-- Smiley face circle -->
+  <circle cx="600" cy="285" r="180" fill="none" stroke="#8892b4" stroke-width="6"/>
+
+  <!-- Eyes -->
+  <circle cx="530" cy="230" r="18" fill="#8892b4"/>
+  <circle cx="670" cy="230" r="18" fill="#8892b4"/>
+
+  <!-- Smile -->
+  <path d="M500 320 Q600 420 700 320" stroke="#8892b4" stroke-width="16" fill="none" stroke-linecap="round"/>
+
+  <!-- Name -->
+  <text x="600" y="535" font-family="Georgia, serif" font-size="42" font-weight="normal"
+        fill="#8892b4" text-anchor="middle" letter-spacing="2">Luke Richards, Ph.D.</text>
+</svg>
