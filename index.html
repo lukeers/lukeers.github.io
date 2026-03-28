@@ -176,6 +176,51 @@
 			border-bottom-color: var(--border);
 		}
 
+		/* Publications section */
+		.publications h2 {
+			font-size: 0.68rem;
+			font-weight: 500;
+			text-transform: uppercase;
+			letter-spacing: 0.12em;
+			color: var(--text-muted);
+			margin-bottom: 20px;
+		}
+
+		.pub-list {
+			list-style: none;
+			display: grid;
+			gap: 18px;
+		}
+
+		.pub-list li {
+			font-size: 0.9rem;
+			line-height: 1.5;
+		}
+
+		.pub-title {
+			color: var(--accent);
+			text-decoration: none;
+			border-bottom: 1px solid transparent;
+			transition: color 0.2s, border-color 0.2s;
+			font-weight: 500;
+		}
+
+		.pub-title:hover {
+			color: var(--accent-hover);
+			border-bottom-color: var(--border);
+		}
+
+		.pub-meta {
+			color: var(--text-muted);
+			font-size: 0.8rem;
+			margin-top: 2px;
+		}
+
+		.pub-loading, .pub-error {
+			color: var(--text-muted);
+			font-size: 0.9rem;
+		}
+
 		/* Footer */
 		footer {
 			text-align: center;
@@ -213,6 +258,15 @@
 
 		<hr class="divider">
 
+		<section class="publications">
+			<h2>Publications</h2>
+			<ul class="pub-list" id="pub-list">
+				<li class="pub-loading">Loading publications…</li>
+			</ul>
+		</section>
+
+		<hr class="divider">
+
 		<section class="info">
 			<h2>Contact &amp; Links</h2>
 			<ul class="info-list">
@@ -234,6 +288,42 @@
 	var d = function(a) { return a.map(function(c){return String.fromCharCode(c);}).join(''); };
 
 	document.getElementById('footer-year').textContent = new Date().getFullYear();
+
+	// Publications: pulled live from Semantic Scholar
+	var pubList = document.getElementById('pub-list');
+	fetch('https://api.semanticscholar.org/graph/v1/author/20566880?fields=papers.title,papers.year,papers.venue,papers.externalIds,papers.url,papers.authors')
+		.then(function(r) { return r.json(); })
+		.then(function(data) {
+			var papers = data.papers.slice().sort(function(a, b) { return b.year - a.year; });
+			pubList.innerHTML = '';
+			papers.forEach(function(p) {
+				var li = document.createElement('li');
+				var link = document.createElement('a');
+				link.className = 'pub-title';
+				link.textContent = p.title;
+				// Prefer DOI link, fall back to Semantic Scholar page
+				if (p.externalIds && p.externalIds.DOI) {
+					link.href = 'https://doi.org/' + p.externalIds.DOI;
+				} else {
+					link.href = p.url;
+				}
+				link.target = '_blank';
+				link.rel = 'noopener noreferrer';
+				var meta = document.createElement('div');
+				meta.className = 'pub-meta';
+				var venue = p.venue || 'Preprint';
+				var authors = p.authors.map(function(a) {
+					return a.authorId === '20566880' ? '<strong>' + a.name + '</strong>' : a.name;
+				}).join(', ');
+				meta.innerHTML = venue + ' &middot; ' + p.year + ' &middot; ' + authors;
+				li.appendChild(link);
+				li.appendChild(meta);
+				pubList.appendChild(li);
+			});
+		})
+		.catch(function() {
+			pubList.innerHTML = '<li class="pub-error">Could not load publications. <a href="https://scholar.google.com/citations?user=aoDu72EAAAAJ&hl=en">View on Google Scholar</a>.</li>';
+		});
 
 	// lerichards at umbc.edu
 	var email = d([108,101,114,105,99,104,97,114,100,115,32,97,116,32,117,109,98,99,46,101,100,117]);
