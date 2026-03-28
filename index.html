@@ -294,7 +294,7 @@
 	fetch('https://api.semanticscholar.org/graph/v1/author/20566880?fields=papers.title,papers.year,papers.venue,papers.externalIds,papers.url,papers.authors')
 		.then(function(r) { return r.json(); })
 		.then(function(data) {
-			var papers = data.papers.slice().sort(function(a, b) { return b.year - a.year; });
+			var papers = data.papers.filter(function(p) { return p.venue; }).sort(function(a, b) { return b.year - a.year; });
 			pubList.innerHTML = '';
 			papers.forEach(function(p) {
 				var li = document.createElement('li');
