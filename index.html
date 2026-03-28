@@ -226,12 +226,14 @@
 </main>
 
 <footer>
-	&copy; <script>document.write(new Date().getFullYear());</script> Luke Richards
+	&copy; <span id="footer-year"></span> Luke Richards
 </footer>
 
 <script>
 (function() {
 	var d = function(a) { return a.map(function(c){return String.fromCharCode(c);}).join(''); };
+
+	document.getElementById('footer-year').textContent = new Date().getFullYear();
 
 	// lerichards at umbc.edu
 	var email = d([108,101,114,105,99,104,97,114,100,115,32,97,116,32,117,109,98,99,46,101,100,117]);
